@@ -1,0 +1,65 @@
+version: '3'
+services:
+    video-management-service:
+        build:
+            context: video-management-service
+            dockerfile: Dockerfile-dev
+        restart: always
+        ports:
+            - "8081:8080"
+        links:
+            - database
+            - video-processing-service
+        volumes:
+            - ./storage:/storage/var
+        environment:
+            DATASOURCE_URL: jdbc:mysql://database:3306/ds_project?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+            DATASOURCE_USER: springuser
+            DATASOURCE_PASSWORD: DSP2019!
+    
+    video-processing-service:
+        build:
+            context: video-processing-service
+            dockerfile: Dockerfile-dev
+        volumes:
+            - ./video-processing-service:/app
+            - ./storage:/storage/var
+    
+    api-gateway:
+        build:
+            context: api-gateway
+            dockerfile: Dockerfile-dev
+        ports:
+            - "8080:80"
+        links:
+            - video-management-service
+        volumes:
+            - ./api-gateway/src:/app
+            - ./storage:/storage/var
+            - ./logs:/var/log/nginx/
+    
+    database:
+        image: mysql
+        environment:
+            MYSQL_DATABASE: ds_project
+            MYSQL_USER: springuser
+            MYSQL_PASSWORD: DSP2019!
+            MYSQL_ROOT_PASSWORD: toor
+    
+    metrics-exporter:
+        build:
+            context: metrics-exporter
+            dockerfile: Dockerfile-dev
+        volumes: 
+            - ./metrics-exporter:/app
+            - ./logs:/app/logs
+    
+    prometheus:
+        build:
+            context: prometheus
+            dockerfile: Dockerfile-dev
+        ports: 
+            - "9090:9090"
+        links:
+            - metrics-exporter
+

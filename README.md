@@ -1,1 +1,1 @@
-# distributed_computing_project
+# Distributed Systems and Big Data project

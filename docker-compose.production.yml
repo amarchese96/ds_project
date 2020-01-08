@@ -1,0 +1,58 @@
+version: '3'
+services:
+    video-management-service:
+        image: angelo1996/video-management-service
+        links:
+            - database
+            - video-processing-service
+        volumes:
+            - storage:/storage/var
+        environment:
+            DATASOURCE_URL: jdbc:mysql://database:3306/distributed_computing_project?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+            DATASOURCE_USER: springuser
+            DATASOURCE_PASSWORD: DSP2019!
+        restart: always
+    
+    video-processing-service:
+        image: angelo1996/video-processing-service
+        volumes:
+            - storage:/storage/var
+        restart: always
+    
+    api-gateway:
+        image: angelo1996/api-gateway
+        ports:
+            - "8080:80"
+        links:
+            - video-management-service
+        volumes:
+            - storage:/storage/var
+            - logs:/var/log/nginx/
+        restart: always
+    
+    database:
+        image: mysql
+        environment:
+            MYSQL_DATABASE: distributed_computing_project
+            MYSQL_USER: springuser
+            MYSQL_PASSWORD: DSP2019!
+            MYSQL_ROOT_PASSWORD: toor
+        restart: always
+    
+    metrics-exporter:
+        image: angelo1996/metrics-exporter
+        volumes: 
+            - logs:/app/logs
+        restart: always
+    
+    prometheus:
+        image: angelo1996/prometheus
+        ports: 
+            - "9090:9090"
+        links:
+            - metrics-exporter
+        restart: always
+volumes: 
+    storage:
+    logs:
+

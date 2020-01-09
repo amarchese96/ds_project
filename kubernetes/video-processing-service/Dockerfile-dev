@@ -1,0 +1,5 @@
+FROM ubuntu:19.04
+RUN apt-get update -y && apt-get install default-jre -y && apt-get install ffmpeg -y
+WORKDIR /app
+ADD ./target/video-processing-service-0.0.1-SNAPSHOT.jar ./service.jar
+CMD java -jar service.jar

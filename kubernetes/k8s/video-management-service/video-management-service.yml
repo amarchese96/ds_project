@@ -1,0 +1,105 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: database
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: database
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: video-management-service
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: video-management-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+spec:
+  selector:
+      matchLabels:
+          app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+      - name: database
+        image: mariadb:10.4
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - configMapRef:
+            name: database-env-file
+        - secretRef:
+            name: database-secret-file
+        volumeMounts:
+          - name: database-data
+            mountPath: /var/lib/mysql
+      volumes:
+      - name: database-data
+        hostPath:
+            path: /database-data
+            type: DirectoryOrCreate
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-management-service
+spec:
+  selector:
+      matchLabels:
+          app: video-management-service
+  template:
+    metadata:
+      labels:
+        app: video-management-service
+    spec:
+      containers:
+      - name: video-management-service
+        image: video-management-service-prod:v1
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: video-management-service-env-file
+        - secretRef:
+            name: video-management-service-secret-file
+        volumeMounts:
+          - name: storage
+            mountPath: /storage/var
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 3
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: storage-claim
+      initContainers:
+      - name: waitdb
+        image: imega/mysql-client
+        command: ["sh", "-c", "until mysqladmin -u$(DATASOURCE_USER) -p$(DATASOURCE_PASSWORD) -h$(DATASOURCE_HOST) status >/dev/null 2>&1 </dev/null; do echo waiting for db; sleep 2; done"]
+        envFrom:
+        - configMapRef:
+            name: video-management-service-env-file
+        - secretRef:
+            name: video-management-service-secret-file
+
+

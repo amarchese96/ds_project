@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spout
+spec:
+  selector:
+      matchLabels:
+          app: spout
+  template:
+    metadata:
+      labels:
+        app: spout
+    spec:
+      containers:
+      - name: spout
+        image: spout-prod:v1
+        envFrom:
+        - configMapRef:
+            name: spout-env-file
+        volumeMounts:
+          - name: logs
+            mountPath: /app/logs
+            readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          initialDelaySeconds: 60
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 3
+      volumes:
+      - name: logs
+        persistentVolumeClaim:
+          claimName: logs-claim
+
+

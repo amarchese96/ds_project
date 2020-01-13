@@ -20,9 +20,6 @@ COPY ./spark-dependencies/jars /opt/spark/jars
 COPY ./spark-dependencies/bin /opt/spark/bin
 COPY ./spark-dependencies/sbin /opt/spark/sbin
 COPY ./entrypoint.sh /opt/
-COPY ./spark-dependencies/examples /opt/spark/examples
-COPY ./spark-dependencies/kubernetes/tests /opt/spark/tests
-COPY ./spark-dependencies/data /opt/spark/data
 
 ENV SPARK_HOME /opt/spark
 

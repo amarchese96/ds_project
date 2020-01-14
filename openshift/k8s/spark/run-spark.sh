@@ -16,4 +16,5 @@
     --conf spark.kubernetes.driverEnv.EMAIL_SENDER=marchese.angelo1@gmail.com \
     --conf spark.kubernetes.driverEnv.EMAIL_RECEIVER=marchese.angelo1@gmail.com \
     --conf spark.kubernetes.driverEnv.SENDGRID_API_KEY=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 \
+    --conf spark.kubernetes.submission.waitAppCompletion=false \
     local:///opt/spark/work-dir/service.jar

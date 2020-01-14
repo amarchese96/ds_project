@@ -5,10 +5,10 @@ kind: ConfigMap
 metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"kind":"ConfigMap","apiVersion":"v1","metadata":{"name":"database-env-file","creationTimestamp":null},"data":{"MYSQL_DATABASE":"ds_project"}}
-  creationTimestamp: "2020-01-09T09:48:46Z"
+      {"apiVersion":"v1","data":{"MYSQL_DATABASE":"ds_project"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2020-01-09T09:48:46Z","name":"database-env-file","namespace":"default","resourceVersion":"180827","selfLink":"/api/v1/namespaces/default/configmaps/database-env-file","uid":"b6238a50-9ff5-4f1f-bf49-efc5ed480f2b"}}
+  creationTimestamp: "2020-01-09T10:49:21Z"
   name: database-env-file
   namespace: default
-  resourceVersion: "180827"
+  resourceVersion: "190186"
   selfLink: /api/v1/namespaces/default/configmaps/database-env-file
-  uid: b6238a50-9ff5-4f1f-bf49-efc5ed480f2b
+  uid: 83a54c9f-7bab-4153-99fe-10f4307d572e

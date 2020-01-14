@@ -7,10 +7,10 @@ kind: ConfigMap
 metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"kind":"ConfigMap","apiVersion":"v1","metadata":{"name":"video-processing-service-env-file","creationTimestamp":null},"data":{"KAFKA_ADDRESS":"kafkaa:9092","KAFKA_GROUP_ID":"video-processing-service-group","KAFKA_MAIN_TOPIC":"videos"}}
+      {"apiVersion":"v1","data":{"KAFKA_ADDRESS":"kafkaa:9092","KAFKA_GROUP_ID":"video-processing-service-group","KAFKA_MAIN_TOPIC":"videos"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2020-01-09T09:48:47Z","name":"video-processing-service-env-file","namespace":"default","resourceVersion":"180831","selfLink":"/api/v1/namespaces/default/configmaps/video-processing-service-env-file","uid":"7f07a0b3-c125-47d9-9529-3ca207f47fa8"}}
   creationTimestamp: "2020-01-09T09:48:47Z"
   name: video-processing-service-env-file
   namespace: default
-  resourceVersion: "180831"
+  resourceVersion: "190762"
   selfLink: /api/v1/namespaces/default/configmaps/video-processing-service-env-file
   uid: 7f07a0b3-c125-47d9-9529-3ca207f47fa8

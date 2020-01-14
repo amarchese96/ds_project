@@ -11,10 +11,10 @@ kind: ConfigMap
 metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"kind":"ConfigMap","apiVersion":"v1","metadata":{"name":"video-management-service-env-file","creationTimestamp":null},"data":{"DATASOURCE_HOST":"database","DATASOURCE_PASSWORD":"DSP2019!","DATASOURCE_URL":"jdbc:mysql://database:3306/ds_project?allowPublicKeyRetrieval=true\u0026useSSL=false\u0026autoReconnect=true\u0026failOverReadOnly=false\u0026maxReconnects=10","DATASOURCE_USER":"springuser","KAFKA_ADDRESS":"kafkaa:9092","KAFKA_GROUP_ID":"video-management-service-group","KAFKA_MAIN_TOPIC":"videos"}}
-  creationTimestamp: "2020-01-09T09:48:46Z"
+      {"apiVersion":"v1","data":{"DATASOURCE_HOST":"database","DATASOURCE_PASSWORD":"DSP2019!","DATASOURCE_URL":"jdbc:mysql://database:3306/ds_project?allowPublicKeyRetrieval=true\u0026useSSL=false\u0026autoReconnect=true\u0026failOverReadOnly=false\u0026maxReconnects=10","DATASOURCE_USER":"springuser","KAFKA_ADDRESS":"kafkaa:9092","KAFKA_GROUP_ID":"video-management-service-group","KAFKA_MAIN_TOPIC":"videos"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2020-01-09T09:48:46Z","name":"video-management-service-env-file","namespace":"default","resourceVersion":"180829","selfLink":"/api/v1/namespaces/default/configmaps/video-management-service-env-file","uid":"a24c0a99-daef-4c85-8f04-3dd52d7d2ea1"}}
+  creationTimestamp: "2020-01-09T10:49:21Z"
   name: video-management-service-env-file
   namespace: default
-  resourceVersion: "180829"
+  resourceVersion: "190188"
   selfLink: /api/v1/namespaces/default/configmaps/video-management-service-env-file
-  uid: a24c0a99-daef-4c85-8f04-3dd52d7d2ea1
+  uid: ba1f02bf-45d0-46d6-8184-f5409f0cf4e1

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  labels:
+    app: api-gateway-prod
+  name: api-gateway-prod
+spec: {}
+

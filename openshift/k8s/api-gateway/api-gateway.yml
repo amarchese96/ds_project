@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ds-project
+  name: api-gateway
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: api-gateway
+---
+apiVersion: v1
+kind: Route
+metadata:
+  name: route
+  namespace: ds-project
+spec:
+  host: ds-project.master.particles.dieei.unict.it
+  to:
+    kind: Service
+    name: api-gateway
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ds-project
+  name: api-gateway
+spec:
+  selector:
+      matchLabels:
+          app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+      - name: api-gateway
+        image: docker-registry.default.svc:5000/ds-project/api-gateway-prod:v1
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: storage
+            mountPath: /storage/var
+          - name: logs
+            mountPath: /var/log/nginx/
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: storage-claim
+      - name: logs
+        persistentVolumeClaim:
+          claimName: logs-claim

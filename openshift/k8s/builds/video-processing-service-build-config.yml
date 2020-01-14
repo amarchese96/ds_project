@@ -1,0 +1,19 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "video-processing-service-build" 
+spec:
+  runPolicy: "Serial"
+  source:
+    type: "Git" 
+    git:
+      uri: "https://github.com/ilconte96/ds_project"
+      ref: master
+    contextDir: "openshift/video-processing-service"
+  strategy:
+    type: "Docker"
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "video-processing-service-prod:v1"
+

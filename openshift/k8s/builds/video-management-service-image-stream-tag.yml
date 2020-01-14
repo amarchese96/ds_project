@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  labels:
+    app: video-management-service-prod
+  name: video-management-service-prod
+spec: {}
+

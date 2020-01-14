@@ -1,0 +1,19 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "video-management-service-build" 
+spec:
+  runPolicy: "Serial"
+  source:
+    type: "Git" 
+    git:
+      uri: "https://github.com/ilconte96/ds_project"
+      ref: master
+    contextDir: "openshift/video-management-service"
+  strategy:
+    type: "Docker"
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "video-management-service-prod:v1"
+

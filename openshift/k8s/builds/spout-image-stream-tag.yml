@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  labels:
+    app: spout-prod
+  name: spout-prod
+spec: {}
+

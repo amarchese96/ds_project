@@ -1,0 +1,19 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "spark-build" 
+spec:
+  runPolicy: "Serial"
+  source:
+    type: "Git" 
+    git:
+      uri: "https://github.com/ilconte96/ds_project"
+      ref: master
+    contextDir: "openshift/spark"
+  strategy:
+    type: "Docker"
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "spark-prod:v1"
+

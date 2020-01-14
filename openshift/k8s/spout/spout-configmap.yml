@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  KAFKA_ADDRESS: kafkaa:9092
+  KAFKA_GROUP_ID: spout-group
+  KAFKA_MAIN_TOPIC: logs
+  PRODUCTION_INTERVAL: "3"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"kind":"ConfigMap","apiVersion":"v1","metadata":{"name":"spout-env-file","creationTimestamp":null},"data":{"KAFKA_ADDRESS":"kafkaa:9092","KAFKA_GROUP_ID":"spout-group","KAFKA_MAIN_TOPIC":"logs","PRODUCTION_INTERVAL":"3"}}
+  creationTimestamp: 2020-01-13T19:34:24Z
+  name: spout-env-file
+  namespace: ds-project
+  resourceVersion: "33767913"
+  selfLink: /api/v1/namespaces/ds-project/configmaps/spout-env-file
+  uid: b4516057-363b-11ea-b8d0-069c1d03e046

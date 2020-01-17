@@ -22,8 +22,5 @@ kubectl create configmap spout-env-file --from-env-file=./spout/spout-env-file.p
 
 kubectl get configmap spout-env-file -o yaml > spout/spout-configmap.yml
 
-kubectl create configmap spark-env-file --from-env-file=./spark/spark-env-file.properties --save-config
-
-kubectl get configmap spark-env-file -o yaml > spark/spark-configmap.yml
 
 

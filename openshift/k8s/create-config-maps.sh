@@ -14,8 +14,5 @@ oc create configmap spout-env-file --from-env-file=./spout/spout-env-file.proper
 
 oc get configmap spout-env-file -o yaml > spout/spout-configmap.yml
 
-oc create configmap spark-env-file --from-env-file=./spark/spark-env-file.properties --save-config
-
-oc get configmap spark-env-file -o yaml > spark/spark-configmap.yml
 
 

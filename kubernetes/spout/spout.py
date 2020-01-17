@@ -21,12 +21,9 @@ def producer(requests_queue):
     app.logger.info(os.getenv('KAFKA_MAIN_TOPIC'))
     while True:
         while requests_queue.is_empty() is False:
-            app.logger.info('Attenzione coda non vuota quindi potrei prendere')
             try:
                 request_time = requests_queue.pull()
-                app.logger.info(f'Sto producendo {request_time}')
                 kafka_producer.send(os.getenv('KAFKA_MAIN_TOPIC'), value=f'{request_time}')
-                app.logger.info(f'Prodotto {request_time}')
             except Exception as e:
                 app.logger.info(e)
                 pass

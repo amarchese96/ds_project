@@ -39,7 +39,7 @@ services:
             - ./logs:/var/log/nginx/
     
     database:
-        image: mysql
+        image: mariadb:10.4
         environment:
             MYSQL_DATABASE: ds_project
             MYSQL_USER: springuser

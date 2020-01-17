@@ -31,7 +31,7 @@ services:
         restart: always
     
     database:
-        image: mysql
+        image: mariadb:10.4
         environment:
             MYSQL_DATABASE: distributed_computing_project
             MYSQL_USER: springuser

@@ -73,5 +73,7 @@ your VM with the command:
 	kubectl apply -f api-gateway
 
 	kubectl apply -f ingress
+
+	sh ./spark/run-spark.sh
 ```
 
